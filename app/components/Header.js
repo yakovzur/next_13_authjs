@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import React from "react";
-import { useSession } from "next-auth/react";
+import { useSession, signOut } from "next-auth/react";
 
 const Header = () => {
 
@@ -16,9 +16,11 @@ const Header = () => {
         {data?.user ? (
           <>
             <div className="text-emerald-700 mr-4">
-            <p>Hi, {data.user.name}</p>
+            <p>Hi, {data?.user?.name}</p>
             </div>
-            <Link href='/'>Logout</Link>
+            <span className="cursor-pointer" onClick={() => signOut()}>
+              Logout
+            </span>
             </>
         ) : (   
           <Link href='/login'>Login</Link>
