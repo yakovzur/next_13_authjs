@@ -1,5 +1,6 @@
 "use client";
 
+import axios from "axios";
 import React, { useState } from "react";
 
 const Register = () => {
@@ -7,8 +8,18 @@ const Register = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const submitHandler = (e) => {
+  const submitHandler = async (e) => {
     e.preventDefault();
+    try {
+      const { data } = await axios.post('/api/register', {
+        name, 
+        email, 
+        password,
+      });
+      console.log(data);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -31,7 +42,7 @@ const Register = () => {
 
             <div className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline mb-6">
               <input
-                placeholder="Name"
+                placeholder="email"
                 type="email"
                 id="email_field"
                 value={email}
